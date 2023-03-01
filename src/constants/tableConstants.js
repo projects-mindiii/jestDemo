@@ -21,6 +21,7 @@ const tableConstants = {
     "CRAVE_PROFILE_SUB_TYPE": "crave_profile_sub_types",
     "CRAVE_SMOKE_OPTIONS": "crave_smoke_options",
     "CRAVE_USERS_PICTURES": "crave_users_pictures",
+    "USERS_PRODUCTS" : "user_products"
 
 };
 export default tableConstants;
