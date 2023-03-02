@@ -29,7 +29,9 @@ export default class productService{
                 const rsp = {
                     status:true,
                     status_code:StatusCodes.OK,
-                    response:productData
+                    response:{"p_name":req.body.name,
+                              "price" :req.body.price
+                             }
                 }
                 return rsp;
             }else{

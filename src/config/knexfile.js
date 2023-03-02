@@ -37,7 +37,16 @@ if (process.env.NODE_ENV == 'production') {
         charset: process.env.DB_CHARSET,
         timezone: process.env.DB_TIMEZONE
     }
-} else {
+}else if (process.env.NODE_ENV == 'test'){ // Need to define test database for testing.
+    connection = {
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        charset: process.env.DB_CHARSET,
+        timezone: process.env.DB_TIMEZONE
+    }
+}else {
     console.log(`No database env`)
 }
 
