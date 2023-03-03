@@ -1,14 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[` 1`] = `
+{
+  "data": {
+    "p_name": "NewProduct02",
+    "price": 750,
+  },
+  "message": "Product created successfully!",
+  "status": "success",
+  "status_code": 200,
+}
+`;
+
+exports[`api test suite tests /deleteProduct/:id endpoints 1`] = `
+{
+  "data": "",
+  "message": "Product deleted successfully!",
+  "status": "success",
+  "status_code": 200,
+}
+`;
+
 exports[`api test suite tests /get/:id endpoints 1`] = `
 {
   "data": {
-    "created_at": "2023-03-03T06:50:54.000Z",
+    "created_at": "2023-03-03T07:20:35.000Z",
     "id": 1,
     "p_name": "NewProduct02",
     "price": "510",
     "status": 1,
-    "updated_at": "2023-03-03T06:50:54.000Z",
+    "updated_at": "2023-03-03T07:20:35.000Z",
   },
   "message": "Product fetched successfully!",
   "status": "success",
@@ -20,12 +41,12 @@ exports[`api test suite tests /get-all endpoints 1`] = `
 {
   "data": [
     {
-      "created_at": "2023-03-03T06:50:54.000Z",
+      "created_at": "2023-03-03T07:20:35.000Z",
       "id": 1,
       "p_name": "NewProduct02",
       "price": "510",
       "status": 1,
-      "updated_at": "2023-03-03T06:50:54.000Z",
+      "updated_at": "2023-03-03T07:20:35.000Z",
     },
   ],
   "message": "Product fetched successfully!",
@@ -40,7 +61,7 @@ exports[`api test suite tests /updateProduct/:id endpoints 1`] = `
     "id": "1",
     "p_name": "ProductNameUpdated",
     "price": 510,
-    "updated_at": "2023-03-03 06:50:54",
+    "updated_at": "2023-03-03 07:20:35",
   },
   "message": "Product updated successfully!",
   "status": "success",

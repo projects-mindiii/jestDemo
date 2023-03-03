@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon -e js,ejs,json --watch .env --watch src --exec babel-node src --source-maps",
-    "test": "jest --verbose",
-    "coverage": "jest test/**.test.js --coverage --silent"
+    "test": "jest --verbose --updateSnapshot",
+    "coverage": "jest test/**.test.js --coverage --silent --updateSnapshot"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.49.0",

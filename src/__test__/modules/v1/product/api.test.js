@@ -23,6 +23,7 @@ describe('api test suite', () => {
         expect(response.body).not.toBeNull();
         expect(response.body).toHaveProperty(['data'],{"p_name": "NewProduct02", "price": 750});
         expect(response.statusCode).toBe(200);
+        expect(response.body).toMatchSnapshot(); // Take an snapshot
     });
     
     afterAll(async () => {
@@ -62,7 +63,7 @@ describe('api test suite', () => {
         expect(response.body).not.toBeNull();
         expect(response.body).toEqual(expect.arrayContaining([]));
         expect(response.statusCode).toBe(200);
-        expect(response.body).toMatchSnapshot(); // Take an snapshotccc
+        expect(response.body).toMatchSnapshot(); // Take an snapshot
     });
 
     it('tests /get/:id endpoints', async() => {
@@ -97,6 +98,9 @@ describe('api test suite', () => {
         expect(rspData.message).toMatch("Product deleted successfully!");
         expect(typeof rspData.data).not.toBeNull();
         expect(response.statusCode).toBe(200);
+        expect(response.body).toMatchSnapshot(); // Take an snapshot
     });
+
+    // JEST --updateSnapshot
 
 });
