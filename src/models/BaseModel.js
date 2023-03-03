@@ -324,6 +324,14 @@ class BaseModel {
         });
     }
 
+    truncateTable(tableName){
+        const res = knex(tableName).truncate().then((res) => {
+            return 1;
+        }).catch((err)=>{
+            return err;
+        });
+    }
+
 
 
 
