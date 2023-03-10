@@ -30,7 +30,6 @@ describe('api test suite', () => {
         // clear product tbl after all test cases executed.
         console.log('after-all hook');
         const res = baseModel.truncateTable('user_products');
-        
     })
 
     it('tests /updateProduct/:id endpoints', async() => {
