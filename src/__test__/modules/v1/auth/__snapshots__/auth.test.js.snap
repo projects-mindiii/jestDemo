@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth test suite test invalid credentials /v1/login 1`] = `
+{
+  "data": {},
+  "message": "Internal Server Error",
+  "status": "fail",
+  "status_code": 500,
+}
+`;
+
+exports[`Auth test suite test middleware on empty header(case) /v1/login 1`] = `
+{
+  "data": "",
+  "message": "Header is missing.",
+  "status": "fail",
+  "status_code": 400,
+}
+`;
+
+exports[`Auth test suite test middleware on invalid api-key header(case-3) /v1/login 1`] = `
+{
+  "data": "",
+  "message": "Invalid Api Key",
+  "status": "fail",
+  "status_code": 401,
+}
+`;
+
+exports[`Auth test suite test middleware on invalid device-type header(case-2) /v1/login 1`] = `
+{
+  "data": "",
+  "message": "Device type not allowed",
+  "status": "fail",
+  "status_code": 400,
+}
+`;
+
+exports[`Auth test suite test middleware on invalid header(case) /v1/login 1`] = `
+{
+  "data": "",
+  "message": "Header is missing.",
+  "status": "fail",
+  "status_code": 400,
+}
+`;
+
+exports[`Auth test suite test request body required params1 /v1/login 1`] = `
+{
+  "data": {
+    "fields": {
+      "": [
+        "Must have required property 'password'",
+      ],
+    },
+  },
+  "message": "must have required property 'email'",
+  "status": "fail",
+  "status_code": 400,
+}
+`;
+
+exports[`Auth test suite test request body required params2 /v1/login 1`] = `
+{
+  "data": {
+    "fields": {
+      "": [
+        "Must have required property 'password'",
+      ],
+      "email": [
+        "undefined",
+      ],
+    },
+  },
+  "message": "must have required property 'password'",
+  "status": "fail",
+  "status_code": 400,
+}
+`;
+
+exports[`Auth test suite test request body required params2 /v1/login 2`] = `
+{
+  "data": {
+    "fields": {
+      "": [
+        "Must have required property 'email'",
+      ],
+      "password": [
+        "Password should be a maximum of 8 characters.;Password must contain at least one uppercase, lowercase, number, and a special character.",
+      ],
+    },
+  },
+  "message": "must have required property 'email'",
+  "status": "fail",
+  "status_code": 400,
+}
+`;

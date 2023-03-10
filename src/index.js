@@ -38,6 +38,7 @@ app.listen(app.get("port"), () => {
 })
 
 process.on('uncaughtException', ex => {
+    console.log(ex);
     logger.error("uncaughtException: ",ex.message)
     process.exit(1);
 })
