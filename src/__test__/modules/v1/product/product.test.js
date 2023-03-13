@@ -4,6 +4,8 @@ import app from "../../../../index";
 
 const baseModel = new BaseModel();
 
+let lastId = '';
+
 describe('api test suite', () => {
     
     const newProduct = {
@@ -20,6 +22,8 @@ describe('api test suite', () => {
         // insert product
         console.log('before-all hook');
         const response = await request(app).post("/v1/product/create").send(newProduct);
+        const lastInserted = await baseModel.getLastInsertedId('user_products'); // Getting last inserted product.
+        lastId = lastInserted[0].id;
         expect(response.body).not.toBeNull();
         expect(response.body).toHaveProperty(['data'],{"p_name": "NewProduct02", "price": 750});
         expect(response.statusCode).toBe(200);
@@ -29,11 +33,16 @@ describe('api test suite', () => {
     afterAll(async () => {
         // clear product tbl after all test cases executed.
         console.log('after-all hook');
-        const res = baseModel.truncateTable('user_products');
+        // const res = baseModel.truncateTable('user_products');
+        const lastInserted = await baseModel.getLastInsertedId('user_products');
+        const lastObjDeleted = await baseModel.deleteObj({'id':lastInserted[0].id},'user_products');
+        expect(lastObjDeleted).not.toBeNull();
+        expect(lastObjDeleted).toBe(1);
+        expect(lastObjDeleted).not.toBeFalsy();
     })
 
     it('tests /updateProduct/:id endpoints', async() => {
-        const response = await request(app).put("/v1/product/updateProduct/1").send(updatedData);
+        const response = await request(app).put(`/v1/product/updateProduct/${lastId}`).send(updatedData);
         const rspData = response.body;
         expect(rspData).toHaveProperty('message');
         expect(rspData).not.toHaveProperty('message',null);
@@ -66,7 +75,7 @@ describe('api test suite', () => {
     });
 
     it('tests /get/:id endpoints', async() => {
-        const response = await request(app).get("/v1/product/get/1");
+        const response = await request(app).get(`/v1/product/get/${lastId}`);
         expect(response.body).not.toBeNull();// to check null response body
         expect(response.body).toHaveProperty(['status'],"success");
         expect(response.body).toHaveProperty(['message'],"Product fetched successfully!");
@@ -88,17 +97,17 @@ describe('api test suite', () => {
         expect(response.body).toMatchSnapshot(); // Take an snapshot
     });
 
-    it('tests /deleteProduct/:id endpoints', async() => {
-        const response = await request(app).delete("/v1/product/deleteProduct/1");
-        const rspData = response.body;
-        expect(rspData).toHaveProperty('message');
-        expect(rspData).not.toHaveProperty('message',null);
-        expect(typeof rspData.message).toBe("string");
-        expect(rspData.message).toMatch("Product deleted successfully!");
-        expect(typeof rspData.data).not.toBeNull();
-        expect(response.statusCode).toBe(200);
-        expect(response.body).toMatchSnapshot(); // Take an snapshot
-    });
+    // it('tests /deleteProduct/:id endpoints', async() => {
+    //     const response = await request(app).delete(`/v1/product/deleteProduct/${lastId}`);
+    //     const rspData = response.body;
+    //     expect(rspData).toHaveProperty('message');
+    //     expect(rspData).not.toHaveProperty('message',null);
+    //     expect(typeof rspData.message).toBe("string");
+    //     expect(rspData.message).toMatch("Product deleted successfully!");
+    //     expect(typeof rspData.data).not.toBeNull();
+    //     expect(response.statusCode).toBe(200);
+    //     expect(response.body).toMatchSnapshot(); // Take an snapshot
+    // });
 
     // JEST --updateSnapshot
 

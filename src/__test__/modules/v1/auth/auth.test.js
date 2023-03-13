@@ -168,7 +168,6 @@ describe('Auth test suite',()=>{
     }
     const response = await request(app).post("/v1/login/").set(headerData).send(requestBody);
     const rspData = response.body;
-  
     expect(rspData).toHaveProperty('status');
     expect(rspData).toHaveProperty('status','fail');
     expect(rspData).toHaveProperty('message');

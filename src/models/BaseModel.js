@@ -332,6 +332,15 @@ class BaseModel {
         });
     }
 
+    getLastInsertedId(tableName){
+        console.log(`tableName: ${tableName}`);
+        return knex(tableName).orderBy('id', 'desc').limit(1).then((lastInserted)=>{
+            return lastInserted;
+        }).catch((err)=>{
+            return err;
+        });
+    }
+
 
 
 
