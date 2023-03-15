@@ -33,9 +33,11 @@ app.use("/v1", v1routes);
 /*set error middleware*/
 app.use(notFound); //return default error message not found
 
-app.listen(app.get("port"), () => {
-    console.log(`Server listing at http://${app.get("host")}:${app.get("port")}`)
-})
+if(process.env.NODE_ENV !== 'test'){
+    app.listen(app.get("port"), () => {
+        console.log(`Server listing at http://${app.get("host")}:${app.get("port")}`)
+    })
+}
 
 process.on('uncaughtException', ex => {
     console.log(ex);
