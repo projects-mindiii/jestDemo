@@ -6,13 +6,13 @@ class CustomSequencer extends Sequencer {
    * Sort test to determine order of execution
    * Sorting is applied after sharding
    * In order to execute test in non-parallel manner use CLI flag(--runInBand).
+   * CLI CMD yarn jest --testSequencer="./src/__test__/utils/customSequencer.js" --runInBand
    */
   sort(tests) {
-
         const orderPath = [
-                           path.join(__dirname, 'product/product.test.js'),
-                           path.join(__dirname, 'user/user.test.js'),
-                           path.join(__dirname, 'auth/auth.test.js')
+                           path.join(process.cwd(), 'src/__test__/modules/v1/product/product.test.js'),
+                           path.join(process.cwd(), 'src/__test__/modules/v1/user/user.test.js'),
+                           path.join(process.cwd(), 'src/__test__/modules/v1/auth/auth.test.js')
                           ];
 
         console.log('Inside customSequencer');
