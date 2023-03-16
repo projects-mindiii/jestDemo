@@ -45,6 +45,7 @@
     "multer": "^1.4.4",
     "multer-s3": "^2.10.0",
     "mysql": "^2.18.1",
+    "node-localstorage": "^2.2.1",
     "nodemailer": "^6.7.2",
     "nodemailer-express-handlebars": "^6.0.0",
     "nodemon": "^2.0.15",
@@ -54,7 +55,6 @@
     "winston-daily-rotate-file": "^4.7.1",
     "yarn": "^1.22.19"
   },
-
   "jest": {
     "testEnvironment": "node"
   }

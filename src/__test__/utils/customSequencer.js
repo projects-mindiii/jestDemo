@@ -10,6 +10,7 @@ class CustomSequencer extends Sequencer {
    */
   sort(tests) {
         const orderPath = [
+                           path.join(process.cwd(), 'src/__test__/utils/commonTestConfig.test.js'),
                            path.join(process.cwd(), 'src/__test__/modules/v1/product/product.test.js'),
                            path.join(process.cwd(), 'src/__test__/modules/v1/user/user.test.js'),
                            path.join(process.cwd(), 'src/__test__/modules/v1/auth/auth.test.js')
