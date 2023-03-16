@@ -7,7 +7,7 @@ import {LocalStorage} from "node-localstorage";
 describe('Auth test suite',()=>{
   it('test middleware on empty header(case) /v1/login', async()=>{
     // constructor function to retrieve localStorage.
-    var localStorage = new LocalStorage(path.join(process.cwd(),'src/__test__/utils/testLocalStorage'));
+    var localStorage = new LocalStorage(path.join(process.cwd(),'src/__test__/localStorage'));
     console.log(JSON.parse(localStorage.getItem('apiHeader')));
         const headerData = {
             'device-id': '',
