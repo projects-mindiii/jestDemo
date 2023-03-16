@@ -5,7 +5,7 @@ class CustomSequencer extends Sequencer {
    /**
    * Sort test to determine order of execution
    * Sorting is applied after sharding
-   * In order to execute test in non-parallel manner use CLI flag(--runInBand)
+   * In order to execute test in non-parallel manner use CLI flag(--runInBand).
    */
   sort(tests) {
 
