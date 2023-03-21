@@ -10,11 +10,11 @@ describe('Initial test configuration',()=>{
         var localStorage = new LocalStorage(path.join(__dirname,'localStorage'));
         // Setting localStorage Item.
         localStorage.setItem('apiHeader', JSON.stringify(
-            {'device-id': 'deviceId',
+            [{'device-id': 'deviceId',
             'device-type': '1',
             'device-token': 'fdfdfdsfdsssupdated',
             'api-key': 'FwD0063eK9muZzPkMvkzE43ddsf'
-            }
+            }]
         ));
 
         console.log(path.join(__dirname,'testLocalStorage'));

@@ -2,6 +2,7 @@ import path from "path";
 import request from 'supertest';
 import app from "../../../../index";
 import {LocalStorage} from "node-localstorage";
+import { type } from "os";
 
 
 describe('Auth test suite',()=>{
@@ -27,6 +28,10 @@ describe('Auth test suite',()=>{
         expect(rspData).toHaveProperty('status_code',400);
         expect(rspData).not.toHaveProperty('status_code',200);
         expect(response.body).toMatchSnapshot();
+        const apiHeader = localStorage.getItem('apiHeader');
+        const storedApiHeader = JSON.parse(apiHeader);
+        storedApiHeader.push({'accessToken':'fdsferewedxxxdfweress'});
+        localStorage.setItem('apiHeader',JSON.stringify(storedApiHeader));
 
   });
 
