@@ -1,6 +1,8 @@
 const request = require('supertest');
+const fs = require('fs');
 import BaseModel from "../../../../models/BaseModel";
 import app from "../../../../index";
+
 
 const baseModel = new BaseModel();
 
@@ -110,5 +112,22 @@ describe('api test suite', () => {
     // });
 
     // JEST --updateSnapshot
+    
+    it('tests /product/uploadImage endpoints', async () => {
+
+        // Before attaching the file we need to convert it into the image-buffer.
+        const imageBuffer = fs.readFileSync(`/home/mspc-26/Downloads/node-yarn-project-structure-v2/src/__test__/testFiles/testImage.png`);
+        
+        const res = await request(app)
+            .post('/v1/product/uploadImage')
+            .set('Content-Type', 'multipart/form-data') // Set content-type is optional
+            .field({'name':'Test name', 'age':'20'}) // Send request body for additional data
+            .attach('image', imageBuffer,'testImage.png'); // Plz pass the image name with extension as 3rs param
+          
+        expect(res.statusCode).toEqual(200);
+        expect(res.statusCode).not.toEqual(400);
+        expect(res.body.message).toEqual('File uploaded successfully');
+        
+    });
 
 });

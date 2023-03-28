@@ -28,6 +28,9 @@ product.delete("/deleteProduct/:id",productController.deleteProduct);
 product.get("/get/:id",productController.getProduct);
 
 
+product.post("/uploadImage",productController.uploadProductImage);
+
+
 
 export {
     product

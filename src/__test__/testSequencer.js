@@ -15,16 +15,13 @@ class TestSequencer extends Sequencer {
                            path.join(process.cwd(), 'src/__test__/modules/v1/user/user.test.js'),
                            path.join(process.cwd(), 'src/__test__/modules/v1/auth/auth.test.js')
                           ];
-
-        console.log('Inside testSequencer');
-        console.log(orderPath);
+        
         return tests.sort((testA, testB) => {
             const indexA = orderPath.indexOf(testA.path);
             const indexB = orderPath.indexOf(testB.path);
             if (indexA === indexB) return 0; // do not swap when tests both not specify in order.
             if (indexA === -1) return 1;
             if (indexB === -1) return -1;
-            console.log(indexA < indexB ? -1 : 1);
         return indexA < indexB ? -1 : 1;
         })
   }

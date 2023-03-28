@@ -121,12 +121,31 @@ const getProduct = async(req, res, next)=>{
         sendErrorResponse(req, res, statusCode.INTERNAL_SERVER_ERROR);
     })
 }
+
+const uploadProductImage = async(req, res, next)=>{
+    if(!req.files){
+        res.status(400).send({'message':'file not found!'});
+        console.log(`file not found!`);
+    }
+    const file = req.files.image;
+    const uploadPath = `/home/mspc-26/Downloads/node-yarn-project-structure-v2/src/uploadFiles/${file.name}`;
+    
+    file.mv(uploadPath,(err)=>{
+        if(err){
+            res.status(400).send({'message':`error in file uploading ${err}`});
+        }
+        res.status(200).send({'message':`File uploaded successfully`});
+    });
+    
+}
+
 const productController = {
     createProduct,
     getAllProducts,
     updateProduct,
     deleteProduct,
-    getProduct
+    getProduct,
+    uploadProductImage
 }
 
 export default productController;

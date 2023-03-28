@@ -6,6 +6,7 @@ import createHttpError from "http-errors";
 import { notFound } from "./middlewares/errorHandler";
 import { responseHandler } from "./middlewares/responseHandler";
 import { ReasonPhrases, StatusCodes, getReasonPhrase, getStatusCode } from 'http-status-codes';
+import fileUpload from "express-fileupload";
 import logger from "~/utils/logger";
 
 var dotenv = require('dotenv').config();
@@ -17,11 +18,12 @@ app.set("host", APP_HOST);
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 //parse application/json
 app.use(bodyParser.json());
+app.use(fileUpload());
+
 
 /**
  * router managment for v1

@@ -27,6 +27,7 @@
     "concat-stream": "^2.0.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
+    "express-fileupload": "^1.4.0",
     "http-errors": "^2.0.0",
     "http-status-codes": "^2.2.0",
     "i18n": "^0.14.1",
@@ -58,7 +59,7 @@
   "jest": {
     "testEnvironment": "node",
     "testTimeout": 5000,
-    "collectCoverage":true,
+    "collectCoverage": true,
     "coverageDirectory": "./src/__test__/reports/coverage",
     "reporters": [
       "default",
@@ -66,7 +67,7 @@
         "./node_modules/jest-html-reporter",
         {
           "pageTitle": "Test Report",
-          "outputPath":"./src/__test__/reports/test-report/test-report.html"
+          "outputPath": "./src/__test__/reports/test-report/test-report.html"
         }
       ]
     ]
