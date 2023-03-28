@@ -2,6 +2,9 @@ const request = require('supertest');
 const fs = require('fs');
 import BaseModel from "../../../../models/BaseModel";
 import app from "../../../../index";
+import path from "path";
+import tableConstants from '~/constants/tableConstants'
+
 
 
 const baseModel = new BaseModel();
@@ -9,7 +12,8 @@ const baseModel = new BaseModel();
 let lastId = '';
 
 describe('api test suite', () => {
-    
+    let uploadedFileName = '';
+
     const newProduct = {
         "name":"NewProduct02",
         "price":"750"
@@ -33,9 +37,14 @@ describe('api test suite', () => {
     });
     
     afterAll(async () => {
-        // clear product tbl after all test cases executed.
-        console.log('after-all hook');
-        // const res = baseModel.truncateTable('user_products');
+        // clear product_images tbl after all test cases executed.
+        const res = baseModel.truncateTable(tableConstants.USERS_PRODUCT_IMAGES);
+        // Unlinking the uploaded file.
+        fs.unlink(uploadedFileName, (err)=>{
+            if(err) throw err;
+            console.log('Uploaded file deleted');
+        }) 
+        console.log(uploadedFileName);
         const lastInserted = await baseModel.getLastInsertedId('user_products');
         const lastObjDeleted = await baseModel.deleteObj({'id':lastInserted[0].id},'user_products');
         expect(lastObjDeleted).not.toBeNull();
@@ -116,7 +125,7 @@ describe('api test suite', () => {
     it('tests /product/uploadImage endpoints', async () => {
 
         // Before attaching the file we need to convert it into the image-buffer.
-        const imageBuffer = fs.readFileSync(`/home/mspc-26/Downloads/node-yarn-project-structure-v2/src/__test__/testFiles/testImage.png`);
+        const imageBuffer = fs.readFileSync(path.join(process.cwd(),'src/__test__/testFiles/testImage.png'));
         
         const res = await request(app)
             .post('/v1/product/uploadImage')
@@ -127,6 +136,8 @@ describe('api test suite', () => {
         expect(res.statusCode).toEqual(200);
         expect(res.statusCode).not.toEqual(400);
         expect(res.body.message).toEqual('File uploaded successfully');
+
+        uploadedFileName = res.body.data.image_path;
         
     });
 

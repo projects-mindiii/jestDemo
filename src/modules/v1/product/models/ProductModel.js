@@ -61,4 +61,24 @@ export default class ProductModel extends BaseModel{
             return error;
         }
     }
+
+    getFileRecord = async(fileId)=>{
+        try {
+            const returnData = await this.fetchObjWithSingleRecord({'id':fileId},"*",tableConstants.USERS_PRODUCT_IMAGES);
+            return returnData;
+        } catch (error) {
+            return error;
+        }
+    }
+
+    saveProductImg = async(productImg)=>{
+        try {
+            const returnData = await this.createObj(productImg,tableConstants.USERS_PRODUCT_IMAGES);
+            return returnData;
+        } catch (error) {
+            return error;
+        }
+    }
+
+    
 }

@@ -146,4 +146,31 @@ export default class productService{
         }
     }
 
+    async saveProductImage(productImage){
+        try {
+            const res = await ProductModelObj.saveProductImg(productImage);
+
+            if(res!=undefined && res!=0){
+                const id = [...res].shift();
+                const insertedFile = await ProductModelObj.getFileRecord(id);
+                
+                return {
+                    status:true,
+                    status_code:StatusCodes.OK,
+                    response:'File uploaded successfully',
+                    data:JSON.parse(JSON.stringify(insertedFile))
+                }
+            }else{
+                return {
+                    status:false,
+                    status_code:customResponseCode.NO_RECORD_FOUND,
+                    response:'Product image could not save!'
+                }
+            }
+        } catch (error) {
+            logger.error(error);
+            return error;
+        }
+    }
+
 }

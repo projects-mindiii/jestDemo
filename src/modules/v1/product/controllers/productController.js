@@ -4,6 +4,11 @@ import customResponseCode from '~/constants/customResponseCode';
 import statusCode from "http-status-codes";
 import BaseModel from "~/models/BaseModel";
 import logger from "~/utils/logger";
+import { v4 as uuidv4 } from 'uuid';
+import path from 'path';
+
+
+
 
 // var baseModelObj = new BaseModel();
 var productServiceObj = new productService();
@@ -127,14 +132,41 @@ const uploadProductImage = async(req, res, next)=>{
         res.status(400).send({'message':'file not found!'});
         console.log(`file not found!`);
     }
+    
     const file = req.files.image;
+    const uniqueName = uuidv4();
+    file.name = uniqueName+path.extname(file.name);
+
     const uploadPath = `/home/mspc-26/Downloads/node-yarn-project-structure-v2/src/uploadFiles/${file.name}`;
     
     file.mv(uploadPath,(err)=>{
         if(err){
             res.status(400).send({'message':`error in file uploading ${err}`});
         }
-        res.status(200).send({'message':`File uploaded successfully`});
+
+        const productImgObj = {
+            "image_name":file.name,
+            "image_path":uploadPath
+        }
+
+        productServiceObj.saveProductImage(productImgObj).then(async(returnData)=>{
+            const responseData = {};
+            if(returnData.status_code==statusCode.OK){
+                responseData.status_code = statusCode.OK;
+                responseData.message = returnData.response;
+                responseData.data    = returnData.data;
+                sendResponse(req, res, statusCode.OK, responseData);
+            }else{
+                responseData.status_code = customResponseCode.NO_RECORD_FOUND;
+                responseData.message = returnData.response;
+                responseData.data    = '';
+                sendResponse(req, res, customResponseCode.NO_RECORD_FOUND, responseData);
+            }
+        }).catch((err)=>{
+            logger.error(err);
+            sendErrorResponse(req, res, statusCode.INTERNAL_SERVER_ERROR);
+        })
+
     });
     
 }
