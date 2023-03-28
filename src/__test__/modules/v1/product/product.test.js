@@ -1,7 +1,7 @@
 const request = require('supertest');
 const fs = require('fs');
-import BaseModel from "../../../../models/BaseModel";
-import app from "../../../../index";
+import BaseModel from "~/models/BaseModel";
+import app from "~/index";
 import path from "path";
 import tableConstants from '~/constants/tableConstants'
 

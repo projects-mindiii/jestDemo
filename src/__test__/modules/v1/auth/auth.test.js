@@ -108,6 +108,7 @@ describe('Auth test suite',()=>{
         'device-token': 'dummytoken',
         'api-key': 'FwD0063eK9muZzPkMvkzE43ddsf'
     }
+    
     const response = await request(app).post("/v1/login/").set(headerData).send();
     const rspData = response.body;
     expect(rspData).toHaveProperty('status');

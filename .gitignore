@@ -105,7 +105,7 @@ dist
 
 # profile & gallery Images 
 uploads/
-uploadFiles/
+public/images
 #yarn lock file no need to upload
 yarn.lock
 

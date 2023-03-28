@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //parse application/json
 app.use(bodyParser.json());
 app.use(fileUpload());
-
+app.use(express.static('public')); 
 
 /**
  * router managment for v1
@@ -32,6 +32,8 @@ app.use( responseHandler );
 
 
 app.use("/v1", v1routes);
+app.use('/images', express.static('images'));
+
 /*set error middleware*/
 app.use(notFound); //return default error message not found
 

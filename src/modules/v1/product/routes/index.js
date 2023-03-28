@@ -30,7 +30,7 @@ product.get("/get/:id",productController.getProduct);
 
 product.post("/uploadImage",productController.uploadProductImage);
 
-
+product.get("/getProductImg/:id", productController.getProductUploadedImg);
 
 export {
     product

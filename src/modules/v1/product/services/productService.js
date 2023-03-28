@@ -173,4 +173,28 @@ export default class productService{
         }
     }
 
+    async getProductImage(imageId){
+        try {
+            const res = await ProductModelObj.getFileRecord(imageId);
+            if(res!=undefined){
+                const imgRecord = JSON.parse(JSON.stringify(res));
+                return {
+                    status:true,
+                    status_code:StatusCodes.OK,
+                    response:'File fetched successfully',
+                    data:{"url":`http://${process.env.APP_HOST}:${process.env.APP_PORT}/images/${imgRecord.image_name}`}
+                }
+            }else{
+                return {
+                    status:false,
+                    status_code:customResponseCode.NO_RECORD_FOUND,
+                    response:'Product image not found!'
+                }
+            }
+        } catch (error) {
+            logger.error(error);
+            return error;
+        }
+    }
+
 }
