@@ -19,7 +19,7 @@ describe('api test suite', () => {
         "price":"750"
     }
 
-    const updatedData = {
+    const updatedData =     {
         "name":"ProductNameUpdated",
         "price":"510"
     }
